@@ -40,6 +40,9 @@ const qk_tap_dance_action_t tap_dance_actions[] = {
   // [TD_QUOTE]  = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, RSFT(KC_QUOT))
 };
 
+/**
+ * Shift-and-Space は、「<Space><Space>おしっぱなし」とすることでキーリピートを発生させることができる。
+ */
 
 // XandY
 #define MY_COLN CTL_T(KC_SCLN)
@@ -64,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LOWER|   -  |   =  |   -  | Alt  | Spc  |  Spc |  Alt |   (  |   )  |      | ESC  |
+ * |ESC/Lo|   -  |   =  |   -  | Alt  | Spc  |  Spc |  Alt |   (  |   )  |      |Ent/Ra|
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
