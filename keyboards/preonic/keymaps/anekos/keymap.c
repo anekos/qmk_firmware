@@ -10,14 +10,15 @@
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 3
-#define _RAISE 4
-#define _ADJUST 16
+#define _LOWER 1
+#define _RAISE 2
+#define _EXT 3
 
 enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
-  RAISE
+  RAISE,
+  EXT
 };
 
 // Fillers to make layering more clear
@@ -46,9 +47,10 @@ const qk_tap_dance_action_t tap_dance_actions[] = {
 
 // XandY
 #define MY_COLN CTL_T(KC_SCLN)
-#define MY_SPC  SFT_T(KC_SPC)
-#define MY_ESC  LT(_LOWER, KC_ESC)
-#define MY_ENT  LT(_RAISE, KC_ENT)
+#define CT_SPC  SFT_T(KC_SPC)
+#define BT_ESC  LT(_LOWER, KC_ESC)
+#define BT_ENT  LT(_RAISE, KC_ENT)
+#define TP_ESC  LT(_EXT, KC_ESC)
 // Alias
 #define KC_LT   LSFT(KC_COMM)
 #define KC_GT   LSFT(KC_DOT)
@@ -63,19 +65,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  `   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * | Ctrl |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |ESC/Lo|   -  |   =  |   -  | Alt  | Spc  |  Spc |  Alt |   (  |   )  |      |Ent/Ra|
+ * |ESC/Lo|      |      |      | Alt  | Spc  | Spc  |  Alt |      |      |      |Ent/Ra|
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
+  {TP_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_GRV},
   {KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    MY_COLN, MY_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {MY_ESC,  KC_MINS, KC_EQL,  KC_MINS, KC_LALT, MY_SPC,  MY_SPC,  KC_RALT, KC_LPRN, KC_RPRN, _______, MY_ENT}
+  {BT_ESC,  _______, _______, _______, KC_LALT, CT_SPC,  CT_SPC,  KC_RALT, _______, _______, _______, BT_ENT}
 },
 
 /* Lower
@@ -109,10 +111,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      |      | MUSIC|      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      | L BTN| C BTN| R BTN|      |      |      |
+ * |      |      |      |      |      |      | LBtn | CBtn | RBtn |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSPC},
+  {_______, KC_WH_U, KC_MS_U, KC_WH_D, RESET,   _______, _______, _______, _______, _______, _______, KC_DEL },
+  {_______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, _______},
+  {_______, _______, _______, _______, _______, _______, _______, MU_TOG,  _______, _______, _______, _______},
+  {_______, _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN3, _______, _______, _______}
+},
+
+/* EXT
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | ↑↑ |  ↑  | ↓↓ | RESET|      |      |      |      |      |      | Del  |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |  ←  |  ↓  |  →  |      |      |  ←  |  ↓  |  ↑  |  →  |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      | MUSIC|      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      | LBtn | CBtn | RBtn |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_EXT] = {
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSPC},
   {_______, KC_WH_U, KC_MS_U, KC_WH_D, RESET,   _______, _______, _______, _______, _______, _______, KC_DEL },
   {_______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, _______},
@@ -154,20 +177,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LOWER:
           if (record->event.pressed) {
             layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
           } else {
             layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
           }
           return false;
           break;
         case RAISE:
           if (record->event.pressed) {
             layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
           } else {
             layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          }
+          return false;
+          break;
+        case EXT:
+          if (record->event.pressed) {
+            layer_on(_EXT);
+          } else {
+            layer_off(_EXT);
           }
           return false;
           break;
