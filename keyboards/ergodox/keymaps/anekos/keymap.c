@@ -17,6 +17,7 @@ const qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_AESC]  = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_ESC)
 };
 
+#define MY_COLN CTL_T(KC_SCLN)
 #define LO_ESC LT(_LOWER,KC_ESC)
 #define RA_ENT LT(_RAISE,KC_ENT)
 #define BT_ESC TD(TD_AESC)
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              _______, KC_6,    KC_7,   KC_8,    KC_9,    KC_0,    KC_BSLS,
              _______, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,    KC_GRV,
-                      KC_H,    KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+                      KC_H,    KC_J,   KC_K,    KC_L,    MY_COLN, KC_QUOT,
              KC_ENT,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                BT_ESC, _______, _______, _______, RA_ENT,
 
