@@ -5,4 +5,6 @@
 
 sudo date
 
-sudo make KEYMAP=anekos
+echo 'Ready?'
+
+sudo make TAP_DANCE_ENABLE=yes KEYMAP=anekos teensy
