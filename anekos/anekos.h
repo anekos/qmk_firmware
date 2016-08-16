@@ -1,7 +1,3 @@
-#ifndef ANEKOS_H
-#define ANEKOS_H
-
-#include "process_tap_dance.h"
 
 /**
  * Shift-and-Space は、「<Space><Space>おしっぱなし」とすることでキーリピートを発生させることができる。
@@ -21,13 +17,3 @@
 // Alias
 #define KC_LT   LSFT(KC_COMM)
 #define KC_GT   LSFT(KC_DOT)
-
-
-#define ACTION_RENDANCE(kc1, kc2) { \
-    .fn = { NULL, rendance_pair_finished, rendance_pair_reset } \
-  }
-
-void rendance_pair_finished (qk_tap_dance_state_t *state, void *user_data);
-void rendance_pair_reset (qk_tap_dance_state_t *state, void *user_data);
-
-#endif

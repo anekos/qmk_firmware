@@ -28,8 +28,9 @@ enum preonic_keycodes {
 
 enum {
   TD_COLON = 0,
-  TD_QUOTE = 1,
-  TD_ESC = 2
+  TD_QUOTE,
+  TD_ESC,
+  TD_SHIFT
 };
 
 
@@ -38,12 +39,14 @@ void dance_quote_reset (qk_tap_dance_state_t *state, void *user_data);
 
 const qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_COLON]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, RSFT(KC_SCLN)),
-  [TD_QUOTE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_quote_finished, dance_quote_reset)
+  [TD_QUOTE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_quote_finished, dance_quote_reset),
+  [TD_SHIFT]  = ACTION_RENDANCE(KC_LSFT, KC_A)
   // [TD_QUOTE]  = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, RSFT(KC_QUOT))
 };
 
 // Tap Dance
 #define TD_QUOT TD(TD_QUOTE)
+#define TD_LSFT TD(TD_SHIFT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -64,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {EX_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_GRV},
   {KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    C_COLN,  TD_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {TD_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
   {LO_ESC,  _______, _______, _______, A_ESC,   S_SPC,   S_SPC,   A_ESC,   _______, _______, _______, RA_ENT}
 },
 

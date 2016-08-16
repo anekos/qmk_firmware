@@ -45,6 +45,7 @@ TOP_DIR = $(tmk_root)
 TMK_DIR = tmk_core
 TMK_PATH = $(TOP_DIR)/$(TMK_DIR)
 LIB_PATH = $(TOP_DIR)/lib
+ANK_PATH = $(TOP_DIR)/anekos
 
 QUANTUM_DIR = quantum
 QUANTUM_PATH = $(TOP_DIR)/$(QUANTUM_DIR)
@@ -239,6 +240,7 @@ VPATH += $(QUANTUM_PATH)
 VPATH += $(QUANTUM_PATH)/keymap_extras
 VPATH += $(QUANTUM_PATH)/audio
 VPATH += $(QUANTUM_PATH)/process_keycode
+VPATH += $(ANK_PATH)
 
 
 # We can assume a ChibiOS target When MCU_FAMILY is defined, since it's not used for LUFA
