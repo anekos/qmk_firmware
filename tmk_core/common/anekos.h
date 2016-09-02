@@ -17,3 +17,14 @@
 // Alias
 #define KC_LT   LSFT(KC_COMM)
 #define KC_GT   LSFT(KC_DOT)
+
+#define CON1    LCTL(LALT(KC_F1))
+#define CON2    LCTL(LALT(KC_F2))
+#define CON3    LCTL(LALT(KC_F3))
+#define CON4    LCTL(LALT(KC_F4))
+#define CON5    LCTL(LALT(KC_F5))
+#define CON6    LCTL(LALT(KC_F6))
+#define CON7    LCTL(LALT(KC_F7))
+#define CON8    LCTL(LALT(KC_F8))
+#define CON9    LCTL(LALT(KC_F9))
+#define CON10   LCTL(LALT(KC_F10))
