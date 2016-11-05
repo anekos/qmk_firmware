@@ -14,7 +14,7 @@ enum {
   TD_AESC = 0
 };
 
-const qk_tap_dance_action_t tap_dance_actions[] = {
+qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_AESC]  = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_ESC)
 };
 
