@@ -1,4 +1,8 @@
 
+#ifndef ANEKOS_H
+#define ANEKOS_H
+
+
 /**
  * Shift-and-Space は、「<Space><Space>おしっぱなし」とすることでキーリピートを発生させることができる。
  */
@@ -28,3 +32,7 @@
 #define CON8    LCTL(LALT(KC_F8))
 #define CON9    LCTL(LALT(KC_F9))
 #define CON10   LCTL(LALT(KC_F10))
+
+
+
+#endif
