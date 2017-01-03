@@ -24,12 +24,17 @@
 // Layer
 #define L1_ESC  LT(LR1, KC_ESC)
 #define L2_ENT  LT(LR2, KC_ENT)
-
+#define TO_0 TO(LR0)
+#define TO_1 TO(LR1)
+#define TO_2 TO(LR2)
+#define TO_3 TO(LR3)
+#define MO_4 MO(LR4)
 
 // Alias
 #define KC_LT   LSFT(KC_COMM)
 #define KC_GT   LSFT(KC_DOT)
 
+// Switch consoles
 #define CON1    LCTL(LALT(KC_F1))
 #define CON2    LCTL(LALT(KC_F2))
 #define CON3    LCTL(LALT(KC_F3))
@@ -41,7 +46,9 @@
 #define CON9    LCTL(LALT(KC_F9))
 #define CON10   LCTL(LALT(KC_F10))
 
-
+// Speicial
+#define AS(x) LALT(LSFT(x))
+#define SandS SFT_T(KC_SPC)
 
 
 

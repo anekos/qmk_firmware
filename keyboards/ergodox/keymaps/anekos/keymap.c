@@ -18,16 +18,6 @@ enum custom_keycodes {
 #define L2_ENT LT(LR2,KC_ENT)
 #define BT_ESC TD(TD_AESC)
 
-#define TO_0 TO(LR0)
-#define TO_1 TO(LR1)
-#define TO_2 TO(LR2)
-#define TO_3 TO(LR3)
-
-#define MO_4 MO(LR4)
-
-#define AS(x) LALT(LSFT(x))
-#define SandS SFT_T(KC_SPC)
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Base
@@ -66,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              TD_LYR,  KC_6,    KC_7,   KC_8,    KC_9,    KC_0,    KC_BSLS,
              _______, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,    KC_GRV,
-                      KC_H,    KC_J,   KC_K,    KC_L,    C_COLN,  TD_QUOT,
+                      KC_H,    KC_J,   KC_K,    KC_L,    C_COLN,  KC_QUOT,
              KC_ENT,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                BT_ESC, KC_MINS, _______, _______, L2_ENT,
 
