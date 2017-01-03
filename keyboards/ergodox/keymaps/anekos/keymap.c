@@ -6,15 +6,6 @@
 
 #define _______ KC_TRNS
 
-#define LR0 0
-#define LR1 1
-#define LR2 2
-#define LR3 3
-#define LR4 4
-
-enum {
-  TD_AESC = 0
-};
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -23,11 +14,6 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_AESC]  = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_ESC)
-};
-
-#define MY_COLN CTL_T(KC_SCLN)
 #define L1_ESC LT(LR1,KC_ESC)
 #define L2_ENT LT(LR2,KC_ENT)
 #define BT_ESC TD(TD_AESC)
@@ -36,6 +22,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define TO_1 TO(LR1)
 #define TO_2 TO(LR2)
 #define TO_3 TO(LR3)
+
+#define MO_4 MO(LR4)
 
 #define AS(x) LALT(LSFT(x))
 #define SandS SFT_T(KC_SPC)
@@ -68,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______,
         KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_ESC,
-        L1_ESC,  _______, _______, KC_MINS, BT_ESC,
+        L1_ESC,  _______, MO_4,    KC_MINS, BT_ESC,
 
 
                                                      AS(KC_G),_______,
@@ -76,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             SandS,   _______, _______,
 
         // right hand
-             OSL(LR4),KC_6,    KC_7,   KC_8,    KC_9,    KC_0,    KC_BSLS,
+             TD_LYR,  KC_6,    KC_7,   KC_8,    KC_9,    KC_0,    KC_BSLS,
              _______, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,    KC_GRV,
-                      KC_H,    KC_J,   KC_K,    KC_L,    MY_COLN, KC_QUOT,
+                      KC_H,    KC_J,   KC_K,    KC_L,    C_COLN,  TD_QUOT,
              KC_ENT,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                BT_ESC, KC_MINS, _______, _______, L2_ENT,
 
@@ -87,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              _______, _______, SandS
     ),
 
-/* Layer 1
+/* Layer 1 - Parens
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |  {   |  }   |      |  BkSpc |
@@ -132,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, _______, _______
 ),
 
-/* Layer 2
+/* Layer 2 - Mouse and Arrows
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
@@ -222,14 +210,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, _______, _______
 ),
 
-/* Layer 4 for one shot
+/* Layer 4 - Unholy Keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      | BkSp   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |        |      |      |      |      |      |------|           |------|  ←  |  ↓  |  ↑  |  →  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -244,6 +232,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `--------------------'
  */
 [LR4] = KEYMAP(
+       // left hand
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______,
+
+                                                    _______, _______,
+                                                             _______,
+                                           _______, _______, _______,
+
+       // right hand
+       _______, _______, _______, _______, _______, _______, KC_BSPC,
+       _______, _______, _______, _______, _______, _______, _______,
+                KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,
+                         _______, _______, _______, _______, _______,
+
+       _______, _______,
+       _______,
+       _______, _______, _______
+),
+
+/* Layer 7 - Oneshot Layer Selector
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           | LR1  |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           | LR2  |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           | LR3  |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[LR7] = KEYMAP(
        // left hand
        _______, _______, _______, _______, _______, _______, _______,
        _______, _______, _______, _______, _______, _______, _______,
@@ -285,18 +318,30 @@ void matrix_scan_user(void) {
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
-            ergodox_right_led_1_on();
+            ergodox_right_led_3_on();
             break;
         case 2:
             ergodox_right_led_2_on();
             break;
         case 3:
             ergodox_right_led_3_on();
+            ergodox_right_led_2_on();
             break;
         case 4:
             ergodox_right_led_1_on();
-            ergodox_right_led_2_on();
+            break;
+        case 5:
             ergodox_right_led_3_on();
+            ergodox_right_led_1_on();
+            break;
+        case 6:
+            ergodox_right_led_2_on();
+            ergodox_right_led_1_on();
+            break;
+        case 7:
+            ergodox_right_led_3_on();
+            ergodox_right_led_2_on();
+            ergodox_right_led_1_on();
             break;
         default:
             // none

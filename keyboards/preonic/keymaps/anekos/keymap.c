@@ -6,14 +6,6 @@
 #endif
 #include "anekos.h"
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
-#define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _EXT 3
 
 enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
@@ -26,24 +18,6 @@ enum preonic_keycodes {
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
-enum {
-  TD_COLON = 0,
-  TD_QUOTE = 1,
-  TD_ESC = 2
-};
-
-
-void dance_quote_finished (qk_tap_dance_state_t *state, void *user_data);
-void dance_quote_reset (qk_tap_dance_state_t *state, void *user_data);
-
-const qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_COLON]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, RSFT(KC_SCLN)),
-  [TD_QUOTE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_quote_finished, dance_quote_reset)
-  // [TD_QUOTE]  = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, RSFT(KC_QUOT))
-};
-
-// Tap Dance
-#define TD_QUOT TD(TD_QUOTE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -60,10 +34,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |ESC/Lo|      |      |   -  | Alt  | Spc  | Spc  |  Alt |   -  |      |      |Ent/Ra|
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = {
+[LR0] = {
   {EX_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS},
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_GRV},
-  {KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    C_COLN,  KC_QUOT},
+  {KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    C_COLN,  TD_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
   {LO_ESC,  _______, _______, KC_MINS, A_ESC,   S_SPC,   S_SPC,   A_ESC,   KC_MINS, _______, _______, RA_ENT}
 },
@@ -81,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_LOWER] = {
+[LR1] = {
   {_______, _______, _______, _______, _______, _______, _______, _______, KC_LCBR, KC_RCBR, _______, KC_BSPC},
   {_______, _______, _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, _______, KC_DEL },
   {_______, _______, _______, _______, _______, _______, KC_MINS, KC_UNDS, KC_LPRN, KC_RPRN, _______, _______},
@@ -102,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      | LBtn | CBtn | RBtn |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = {
+[LR2] = {
   {_______, CON1,    CON2,    CON3,    CON4,    CON5,    CON6,    CON7,    CON8,    CON9,    CON10,   KC_BSPC},
   {_______, KC_WH_U, KC_MS_U, KC_WH_D, RESET,   _______, _______, _______, _______, _______, _______, KC_DEL },
   {_______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, _______},
@@ -123,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      | LBtn | CBtn | RBtn |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_EXT] = {
+[LR3] = {
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSPC},
   {_______, KC_WH_U, KC_MS_U, KC_WH_D, RESET,   _______, _______, _______, _______, _______, _______, KC_DEL },
   {_______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,_______, _______},
@@ -164,25 +138,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case LOWER:
           if (record->event.pressed) {
-            layer_on(_LOWER);
+            layer_on(LR1);
           } else {
-            layer_off(_LOWER);
+            layer_off(LR1);
           }
           return false;
           break;
         case RAISE:
           if (record->event.pressed) {
-            layer_on(_RAISE);
+            layer_on(LR2);
           } else {
-            layer_off(_RAISE);
+            layer_off(LR2);
           }
           return false;
           break;
         case EXT:
           if (record->event.pressed) {
-            layer_on(_EXT);
+            layer_on(LR3);
           } else {
-            layer_off(_EXT);
+            layer_off(LR3);
           }
           return false;
           break;
@@ -194,25 +168,6 @@ void matrix_init_user(void) {
     #ifdef AUDIO_ENABLE
         startup_user();
     #endif
-}
-
-
-void dance_quote_finished (qk_tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    register_code (KC_QUOT);
-  } else {
-    register_code (KC_RSFT);
-    register_code (KC_QUOT);
-  }
-}
-
-void dance_quote_reset (qk_tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    unregister_code (KC_QUOT);
-  } else {
-    unregister_code (KC_RSFT);
-    unregister_code (KC_QUOT);
-  }
 }
 
 
