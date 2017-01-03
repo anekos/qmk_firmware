@@ -7,15 +7,23 @@
  * Shift-and-Space は、「<Space><Space>おしっぱなし」とすることでキーリピートを発生させることができる。
  */
 
+// Layers
+#define LR0 0
+#define LR1 1
+#define LR2 2
+#define LR3 3
+#define LR4 4
+#define LR7 7
+
+
 // XandY
 #define A_ESC   ALT_T(KC_ESC)
 #define C_COLN  CTL_T(KC_SCLN)
 #define S_SPC   SFT_T(KC_SPC)
 
 // Layer
-#define LO_ESC  LT(_LOWER, KC_ESC)
-#define RA_ENT  LT(_RAISE, KC_ENT)
-#define EX_ESC  LT(_EXT, KC_ESC)
+#define L1_ESC  LT(LR1, KC_ESC)
+#define L2_ENT  LT(LR2, KC_ENT)
 
 
 // Alias
@@ -32,15 +40,6 @@
 #define CON8    LCTL(LALT(KC_F8))
 #define CON9    LCTL(LALT(KC_F9))
 #define CON10   LCTL(LALT(KC_F10))
-
-
-// Layers
-#define LR0 0
-#define LR1 1
-#define LR2 2
-#define LR3 3
-#define LR4 4
-#define LR7 7
 
 
 
