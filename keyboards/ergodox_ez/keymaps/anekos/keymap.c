@@ -1,4 +1,4 @@
-#include "ergodox.h"
+#include "ergodox_ez.h"
 #include "debug.h"
 #include "action_layer.h"
 #include "version.h"
@@ -14,8 +14,6 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-#define L1_ESC LT(LR1,KC_ESC)
-#define L2_ENT LT(LR2,KC_ENT)
 #define BT_ESC TD(TD_AESC)
 
 
