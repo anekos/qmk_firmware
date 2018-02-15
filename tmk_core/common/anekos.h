@@ -13,6 +13,8 @@
 #define LR2 2
 #define LR3 3
 #define LR4 4
+#define LR5 5
+#define LR6 6
 #define LR7 7
 
 
@@ -28,6 +30,10 @@
 #define TO_1 TO(LR1)
 #define TO_2 TO(LR2)
 #define TO_3 TO(LR3)
+#define TO_4 TO(LR4)
+#define TO_5 TO(LR5)
+#define TO_6 TO(LR6)
+#define TO_7 TO(LR7)
 #define MO_4 MO(LR4)
 
 // Alias
