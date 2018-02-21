@@ -22,7 +22,7 @@
 #define A_ESC   ALT_T(KC_ESC)
 #define C_COLN  CTL_T(KC_SCLN)
 #define S_SPC   SFT_T(KC_SPC)
-
+ 
 // Layer
 #define L1_ESC  LT(LR1, KC_ESC)
 #define L2_ENT  LT(LR2, KC_ENT)
@@ -34,7 +34,13 @@
 #define TO_5 TO(LR5)
 #define TO_6 TO(LR6)
 #define TO_7 TO(LR7)
+#define MO_1 MO(LR1)
+#define MO_2 MO(LR2)
+#define MO_3 MO(LR3)
 #define MO_4 MO(LR4)
+#define MO_5 MO(LR5)
+#define MO_6 MO(LR6)
+#define MO_7 MO(LR7)
 
 // Alias
 #define KC_LT   LSFT(KC_COMM)
