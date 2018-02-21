@@ -178,12 +178,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // define variables for reactive RGB {{{
 
 static uint16_t counter[255] = {0};
+static uint16_t score = 0;
 static uint8_t highest = 0;
 #define COUNT_LO 4
 #define COUNT_HI 29
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
+    score++;
     if (COUNT_LO <= keycode && keycode <= COUNT_HI) {
       uint8_t c = (uint8_t)keycode;
       counter[c]++;
@@ -261,7 +263,7 @@ void render_status(struct CharacterMatrix *matrix) {
   snprintf(
       buf,
       sizeof(buf),
-      "  [%c%c%c%c%c%c%c%c] R%d\n%c = %d",
+      "  [%c%c%c%c%c%c%c%c] R%d\nscore: %d  (%c=%d)",
       IS_LAYER_ON(LR0) ? '0' : '-',
       IS_LAYER_ON(LR1) ? '1' : '-',
       IS_LAYER_ON(LR2) ? '2' : '-',
@@ -271,6 +273,7 @@ void render_status(struct CharacterMatrix *matrix) {
       IS_LAYER_ON(LR6) ? '6' : '-',
       IS_LAYER_ON(LR7) ? '7' : '-',
       rgblight_config.enable ? rgblight_config.mode : 0,
+      score,
       highest_char,
       counter[highest]),
   matrix_write(matrix, buf);
