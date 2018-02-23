@@ -176,17 +176,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // define variables for reactive RGB {{{
 
+static uint16_t counter[255] = {0};
+static uint8_t highest = 0;
+#define COUNT_LO 4
+#define COUNT_HI 29
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
+    if (COUNT_LO <= keycode && keycode <= COUNT_HI) {
+      uint8_t c = (uint8_t)keycode;
+      counter[c]++;
+      if (counter[highest] < counter[c])
+        highest = c;
+    }
   }
   return true;
 }
 
 void matrix_init_user(void) {
-    rgblight_enable();
-    rgblight_mode(5);
-    default_layer_set(1UL << LR0);
-    layer_move(LR0);
+  rgblight_enable();
+  rgblight_mode(5);
+  default_layer_set(1UL << LR0);
+  layer_move(LR0);
 #ifdef SSD1306OLED
   //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
   TWI_Init(TWI_BIT_PRESCALE_1, TWI_BITLENGTH_FROM_FREQ(1, 800000));
@@ -200,7 +211,7 @@ void matrix_init_user(void) {
 #ifdef SSD1306OLED
 
 void matrix_scan_user(void) {
-     iota_gfx_task();  // this is what updates the display continuously
+  iota_gfx_task();  // this is what updates the display continuously
 }
 
 void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
@@ -240,11 +251,13 @@ void render_status(struct CharacterMatrix *matrix) {
     matrix_write(matrix, logo[1][1]);
   }
 
+  char highest_char = 'a' + highest - COUNT_LO;
+
   char buf[40];
   snprintf(
       buf,
       sizeof(buf),
-      "  [%c%c%c%c%c%c%c%c] R%d\nhoge",
+      "  [%c%c%c%c%c%c%c%c] R%d\n%c = %d",
       IS_LAYER_ON(LR0) ? '0' : '-',
       IS_LAYER_ON(LR1) ? '1' : '-',
       IS_LAYER_ON(LR2) ? '2' : '-',
@@ -253,7 +266,9 @@ void render_status(struct CharacterMatrix *matrix) {
       IS_LAYER_ON(LR5) ? '5' : '-',
       IS_LAYER_ON(LR6) ? '6' : '-',
       IS_LAYER_ON(LR7) ? '7' : '-',
-      rgblight_config.enable ? rgblight_config.mode : 0),
+      rgblight_config.enable ? rgblight_config.mode : 0,
+      highest_char,
+      counter[highest]),
   matrix_write(matrix, buf);
 }
 
