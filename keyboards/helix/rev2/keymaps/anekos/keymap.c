@@ -247,7 +247,7 @@ void render_status(struct CharacterMatrix *matrix) {
   snprintf(
       buf,
       sizeof(buf),
-      "[%c%c%c%c%c%c%c%c]\nscore: %d  (%c=%d)\nled: %d-%d,%d,%d",
+      "[%c%c%c%c%c%c%c%c]\nscore: %d  %c=%d\nled: %d-%d,%d,%d",
       IS_LAYER_ON(LR0) ? '0' : '-',
       IS_LAYER_ON(LR1) ? '1' : '-',
       IS_LAYER_ON(LR2) ? '2' : '-',
