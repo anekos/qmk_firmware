@@ -241,29 +241,13 @@ static void render_logo(struct CharacterMatrix *matrix) {
 
 
 void render_status(struct CharacterMatrix *matrix) {
-  // Render to mode icon
-  static char logo[][2][3] = {
-    { {0x95, 0x96, 0}, {0xb5, 0xb6, 0} },
-    { {0x97, 0x98, 0}, {0xb7, 0xb8, 0} }
-  };
-
-  if(keymap_config.swap_lalt_lgui==false){
-    matrix_write(matrix, logo[0][0]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write(matrix, logo[0][1]);
-  }else{
-    matrix_write(matrix, logo[1][0]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write(matrix, logo[1][1]);
-  }
-
   char highest_char = highest ? 'a' + highest - COUNT_LO : '?';
 
-  char buf[40];
+  char buf[60];
   snprintf(
       buf,
       sizeof(buf),
-      "  [%c%c%c%c%c%c%c%c] R%d\nscore: %d  (%c=%d)",
+      "[%c%c%c%c%c%c%c%c]\nscore: %d  (%c=%d)\nled: %d-%d,%d,%d",
       IS_LAYER_ON(LR0) ? '0' : '-',
       IS_LAYER_ON(LR1) ? '1' : '-',
       IS_LAYER_ON(LR2) ? '2' : '-',
@@ -272,10 +256,13 @@ void render_status(struct CharacterMatrix *matrix) {
       IS_LAYER_ON(LR5) ? '5' : '-',
       IS_LAYER_ON(LR6) ? '6' : '-',
       IS_LAYER_ON(LR7) ? '7' : '-',
-      rgblight_config.enable ? rgblight_config.mode : 0,
       score,
       highest_char,
-      counter[highest]),
+      counter[highest],
+      rgblight_config.enable ? rgblight_config.mode : 0,
+      rgblight_config.hue,
+      rgblight_config.sat,
+      rgblight_config.val);
   matrix_write(matrix, buf);
 }
 
