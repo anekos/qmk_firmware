@@ -26,6 +26,7 @@
 // Layer
 #define L1_ESC  LT(LR1, KC_ESC)
 #define L2_ENT  LT(LR2, KC_ENT)
+#define L5_ESC  LT(LR5, KC_ESC)
 #define TO_0 TO(LR0)
 #define TO_1 TO(LR1)
 #define TO_2 TO(LR2)
