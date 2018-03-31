@@ -14,6 +14,7 @@ enum custom_keycodes {
   __LR4,
   __LR5,
   __LR7,
+  WINBOOT,
 };
 
 // Fillers to make layering more clear
@@ -23,7 +24,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Qwerty
+/* Layer 0 - Qwerty
  * ,-----------------------------------------------------------------------------------.
  * | ESC  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  \   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -33,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |ESC/Lo|      | LR4  |   -  | Alt  | Spc  | Spc  |  Alt |   -  |      |      |Ent/Ra|
+ * |ESC/L1|      | LR4  |   -  | Alt  | Spc  | Spc  |  Alt |   -  |      |      |Ent/L2|
  * `-----------------------------------------------------------------------------------'
  */
 [LR0] = KEYMAP( \
@@ -54,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      |   +  |   =  |   <  |   >  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      | F12  |WINBT |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [LR1] = KEYMAP( \
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, _______, KC_DEL , \
   _______, _______, _______, _______, _______, _______, KC_MINS, KC_UNDS, KC_LPRN, KC_RPRN, _______, _______, \
   _______, _______, _______, _______, _______, _______, KC_PLUS, KC_EQL,  KC_LT,   KC_GT,   _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, KC_F12,  WINBOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
 /* Layer 2 - Mouse and Arrows
@@ -136,4 +137,17 @@ void persistant_default_layer_set(uint16_t default_layer) {
 }
 
 void matrix_init_user(void) {
+}
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case WINBOOT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_DOWN)SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+  }
+  return true;
 }
