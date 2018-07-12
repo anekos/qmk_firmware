@@ -63,6 +63,10 @@
 #define AS(x) LALT(LSFT(x))
 #define SandS SFT_T(KC_SPC)
 
+// Combinations
+#define TRIPLE LALT(LCTL(KC_DEL))
+#define StmSS  LALT(LSFT(KC_G))   // Steam Screen Shot
+
 
 
 enum {
