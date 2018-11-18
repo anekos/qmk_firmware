@@ -70,6 +70,38 @@
 #define StmSS  LALT(LSFT(KC_G))   // Steam Screen Shot
 
 
+enum my_custom_keycodes {
+  __LR0 = SAFE_RANGE,
+  __LR1,
+  __LR2,
+  __LR3,
+  __LR4,
+  __LR5,
+  __LR7,
+  WINBOOT,
+  CHRY,
+};
+
+
+bool my_process_record_user(uint16_t keycode, keyrecord_t *record, bool *result) {
+  switch (keycode) {
+    case CHRY:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LALT("s")"C");
+      }
+      *result = false;
+      return true;
+    case WINBOOT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_DOWN)SS_TAP(X_ENTER));
+      }
+      *result = false;
+      return true;
+  }
+
+  return false;
+}
+
 
 enum {
   TD_COLON = 0,

@@ -1,6 +1,17 @@
 #include QMK_KEYBOARD_H
 #include "anekos.h"
 
+enum custom_keycodes {
+  __LR0 = SAFE_RANGE,
+  __LR1,
+  __LR2,
+  __LR3,
+  __LR4,
+  __LR5,
+  __LR7,
+  WINBOOT,
+};
+
 
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -24,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *          | `~   | INS  | Left | Right|                                         | Up   | Down |  [{  |  ]}  |
 *          `---------------------------'                                         `---------------------------'
 *                                        ,-------------.         ,-------------.
-*                                        | Vim  | Alt  |         | Gui  | Term |
+*                                        | Ctrl | Alt  |         | Gui  | Ctrl |
 *                                 ,------|------|------|         |------+------+------.
 *                                 |      |      | Home |         | PgUp |      |      |
 *                                 | S/Spc| A/Esc|------|         |------|A/Esc |S/Spc |
@@ -32,24 +43,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                                 `--------------------'         `--------------------'
 */
 [LR0] = LAYOUT(
-   KC_ESC ,CON1   ,CON2   ,CON3   ,CON4   ,CON5   ,CON6   ,CON7   ,CON8 ,
-   KC_EQL ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,
-   L1_TAB ,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,
-   KC_LCTL,KC_A   ,KC_S   ,KC_D   ,KC_F   ,KC_G   ,
-   KC_LSFT,KC_Z   ,KC_X   ,KC_C   ,KC_V   ,KC_B   ,
-           MO_1   ,KC_INS ,KC_LEFT,KC_RGHT,
-                          AS(KC_G),CHRY,
-                                   KC_HOME,
-                   S_SPC  ,A_ESC  ,KC_END ,
-    CON9  ,CON10  ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_F12,  WINBOOT, TRIPLE,
-    KC_6  ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSLS,
-    KC_Y  ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,L4_GRV ,
-    KC_H  ,KC_J   ,KC_K   ,KC_L   ,C_COLN, KC_QUOT,
-    KC_N  ,KC_M   ,KC_COMM,KC_DOT ,KC_SLSH,KC_ENT ,
-           KC_UP  ,KC_DOWN,KC_LBRC,KC_RBRC,
-        AS(KC_ENT),AS(KC_ENT),
-           KC_PGUP,
-           S_SPC  ,  A_ESC,   S_SPC
+   X0X    ,X1X    ,X2X    ,X3X    ,X4X    , X5X   ,X6X    ,X7X    ,X8X  ,
+   X9X    ,X10X    ,X11X    ,X12X    ,X13X    ,X14X    ,
+   X15X    ,X16X    ,X17X    ,X18X    ,X19X    ,X20X    ,
+   X21X    ,X22X    ,X23X    ,X24X    ,X25X    ,X26X    ,
+   X27X    ,X28X    ,X29X    ,X30X    ,X31X    ,X32X    ,
+           X33X   ,X34X   ,X35X   ,X36X   ,
+                          X37X    ,X38X    ,
+                                   X39X   ,
+                   X40X   ,X41X   ,X42X   ,
+   X43X    ,X44X    ,X45X    ,X46X    ,X47X    , X48X   ,X49X    ,X50X    ,X51X  ,
+   X52X    ,X53X    ,X54X    ,X55X    ,X56X    ,X57X    ,
+   X58X    ,X59X    ,X60X    ,X61X    ,X62X    ,X63X    ,
+   X64X    ,X65X    ,X66X    ,X67X    ,X68X    ,X69X    ,
+   X70X    ,X71X    ,X72X    ,X73X    ,X74X    ,X75X    ,
+           X76X   ,X77X   ,X78X   ,X79X   ,
+                   X80X    ,X81X    ,
+                   X82X   ,
+                   X83X   ,X84X   ,X85X   
     ),
 /****************************************************************************************************
 *
@@ -175,10 +186,13 @@ void led_set_user(uint8_t usb_led) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  bool my_result = false;
-
-  if (my_process_record_user(keycode, record, &my_result))
-    return my_result;
-
+  switch (keycode) {
+    case WINBOOT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_DOWN)SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+  }
   return true;
 }
