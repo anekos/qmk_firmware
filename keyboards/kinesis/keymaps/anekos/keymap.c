@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                                 `--------------------'         `--------------------'
 */
 [LR0] = LAYOUT(
-   KC_ESC ,CON1   ,CON2   ,CON3   ,CON4   ,CON5   ,CON6   ,CON7   ,CON8 ,
+   KC_ESC ,KC_F1  ,KC_F2  ,KC_F3  ,KC_F4  ,KC_F5  ,KC_F6  ,KC_F7  ,KC_F8,
    KC_EQL ,KC_1   ,KC_2   ,KC_3   ,KC_4   ,KC_5   ,
    L1_TAB ,KC_Q   ,KC_W   ,KC_E   ,KC_R   ,KC_T   ,
    KC_LCTL,KC_A   ,KC_S   ,KC_D   ,KC_F   ,KC_G   ,
@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           AS(KC_G),CHRY,
                                    KC_HOME,
                    S_SPC  ,A_ESC  ,KC_END ,
-    CON9  ,CON10  ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_F12,  WINBOOT, TRIPLE,
+    KC_F9 ,KC_F10 ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_F12,  WINBOOT, TRIPLE,
     KC_6  ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSLS,
     KC_Y  ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,L4_GRV ,
     KC_H  ,KC_J   ,KC_K   ,KC_L   ,C_COLN, KC_QUOT,
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *                                 `--------------------'         `--------------------'
 */
 [LR1] = LAYOUT(
-    KC_ESC ,KC_F1  ,KC_F2  ,KC_F3  ,KC_F4  ,KC_F5  ,KC_F6  ,KC_F7  ,KC_F8,
+    KC_ESC ,CON1   ,CON2   ,CON3   ,CON4   ,CON5   ,CON6   ,CON7   ,CON8 ,
     _______,_______,_______,_______,_______,_______,
     _______,_______,_______,_______,_______,_______,
     _______,_______,_______,_______,_______,_______,
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______,
                     _______,_______,_______,
 
-    KC_F9 ,KC_F10 ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_PAUS, KC_FN0, KC_1,
+    CON9  ,CON10  ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_PAUS, KC_FN0, KC_1,
     _______,_______,KC_LCBR,KC_RCBR,_______,KC_BSPC,
     _______,_______,KC_LBRC,KC_RBRC,_______,KC_DEL ,
     KC_MINS,KC_UNDS,KC_LPRN,KC_RPRN,_______,_______,
