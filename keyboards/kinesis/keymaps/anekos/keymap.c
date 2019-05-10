@@ -24,11 +24,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *          | `~   | INS  | Left | Right|                                         | Up   | Down |  [{  |  ]}  |
 *          `---------------------------'                                         `---------------------------'
 *                                        ,-------------.         ,-------------.
-*                                        | Vim  | Alt  |         | Gui  | Term |
+*                                        | Vim  | Alt  |         | Term | Term |
 *                                 ,------|------|------|         |------+------+------.
 *                                 |      |      | Home |         | PgUp |      |      |
 *                                 | S/Spc| A/Esc|------|         |------|A/Esc |S/Spc |
-*                                 |      |      | End  |         | PgDn |      |      |
+*                                 |      |      | Win  |         | PgDn |      |      |
 *                                 `--------------------'         `--------------------'
 */
 [LR0] = LAYOUT(
@@ -40,16 +40,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            MO_1   ,KC_INS ,KC_LEFT,KC_RGHT,
                           AS(KC_G),CHRY,
                                    KC_HOME,
-                   S_SPC  ,A_ESC  ,KC_END ,
+                   S_SPC  ,A_ESC  ,KC_RGUI,
     KC_F9 ,KC_F10 ,KC_F11 ,KC_F12 ,KC_PSCR ,KC_SLCK  ,KC_F12,  WINBOOT, TRIPLE,
     KC_6  ,KC_7   ,KC_8   ,KC_9   ,KC_0   ,KC_BSLS,
     KC_Y  ,KC_U   ,KC_I   ,KC_O   ,KC_P   ,L4_GRV ,
     KC_H  ,KC_J   ,KC_K   ,KC_L   ,C_COLN, KC_QUOT,
     KC_N  ,KC_M   ,KC_COMM,KC_DOT ,KC_SLSH,KC_ENT ,
            KC_UP  ,KC_DOWN,KC_LBRC,KC_RBRC,
-        AS(KC_ENT),AS(KC_ENT),
-           KC_PGUP,
-           KC_PGDN,  A_ESC,   S_SPC
+           S(C(A(KC_P))),AS(KC_ENT),
+           LWIN(C(KC_RIGHT)),
+           LWIN(C(KC_LEFT)),  A_ESC,   S_SPC
     ),
 /****************************************************************************************************
 *
