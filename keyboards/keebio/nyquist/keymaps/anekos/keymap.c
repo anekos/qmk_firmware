@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   L1_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    L4_GRV,  \
   KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    C_COLN,  KC_QUOT, \
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-  MO_1,    MO_4,    A_ESC,   A_ESC,   S_SPC,   A_ESC,   A_ESC,   S_SPC,   A_ESC,   A_ESC,   _______, MO_2    \
+  MO_1,    MO_4,    A_ESC,   KC_LCMD, S_SPC,   A_ESC,   A_ESC,   S_SPC,   A_ESC,   A_ESC,   _______, MO_2    \
 ),
 
 /* Layer 1 - Parens
